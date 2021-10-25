@@ -35,3 +35,5 @@ $ bin/console app:import:playlists
 * hompage --- http//:localhost:8000
 * users list --- http//:localhost:8000/users
 * json end point --- http//:localhost:8000/api/v1/users
+## Api Platform docs
+* swagger api docs --- http//:localhost:8080/api/docs/
