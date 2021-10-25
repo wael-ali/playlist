@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .grey_row {
+        background: grey;
+    }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello to Users list! ✅</h1>
+    <h4>({{ count }}) users</h4>
+
+    <div>
+    {% if previousPage > 0 %}
+    <a href="{{ path('users_list') }}?page={{previousPage}}">previous ({{ previousPage }})</a>
+    {% endif %}
+    <a href="{{ path('users_list') }}?page={{currentPage}}">current ({{ currentPage }})</a>
+    {% if nextPage > 0 %}
+    <a href="{{ path('users_list') }}?page={{nextPage}}">next ({{ nextPage }})</a>
+    {% endif %}
+
+    <h4>({{ totalPages }}) pages</h4>
+    
+    </div>
+    
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Id</th>
+            <th>username</th>
+            <th>email</th>
+            <th>playlists</th>
+        </tr>
+        {% for user in users %}
+            {% set greyRow = ((loop.index is divisible by(2)) ? "grey_row" : "") %}
+            <tr class="{{ greyRow }}">
+                <td>{{ loop.index }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% for playlist in user.playlists %}
+                        <li href="#">({{ loop.index }})-{{ playlist.name }}</li>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    
+    </table> 
+    <hr/>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>title</th>
+            <th>genre</th>
+        </tr>
+        {% for mp3 in mp3s %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ mp3.title }}</td>
+                <td>{{ mp3.genre }}</td>
+            </tr>
+        {% endfor %}
+    
+    </table> 
+    <hr/>
+    {# <table>
+        <tr>
+            <th>#</th>
+            <th>playlist Name</th>
+            <th>songs</th>
+        </tr>
+        {% for playlist in playlists %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ playlist.Name }}</td>
+                {# <td>{{ mp3.genre }}</td> #}
+                {# <td> #}
+                    {# {{ playlist.user.username }} #}
+
+        {# {% for mp3 in playlists.getMp3s %}
+                <li>{{ mp3.title }}</li>
+        {% endfor %}
+                </td>
+            </tr>
+        {% endfor %} #}
+    
+    {# </table>  #}
+
+</div>
+{% endblock %}
